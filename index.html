@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .horizantalnav {
+            height: 75px;
+            width: 100%;
+            /* height: fit-content; */
+            /* position: absolute;
+            display: inline-flex;
+            top: 0px;
+            left:100%; */
+            background-color: cyan;
+            position: fixed;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .horizantalnav .child li {
+            display: inline-flex;
+            /* margin: 10px; */
+            font-size: larger;
+
+        }
+
+        #logo {
+            margin-left: 50px;
+            width: 30px;
+            height: 30px;
+
+        }
+
+        .input1 {
+            width: 180px;
+            height: 30px;
+
+        }
+
+        .horizantalnav .child li:hover .hello {
+            background-color: aquamarine;
+            display: block;
+            position: absolute;
+            margin-top: 75px;
+            margin-inline: auto;
+            border-radius: 20px;
+
+        }
+
+        .horizantalnav .child li:hover .hello {
+            display: block;
+            display: flex;
+        }
+
+        .hello {
+            width: fit-content;
+            height: fit-content;
+            display: none;
+            padding: 20px 50px;
+            position: fixed;
+            left: 100px;;
+            /* margin-inline: auto; */
+            top: 0;
+
+        }
+
+        .innerdiv {
+            width: 200px;
+            height: fit-content;
+            /* float: left; */
+            /* display: flex;;    */
+            margin-inline: 20px;
+            /* display: none; */
+
+        }
+        .child{
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        .child li {
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .m1:hover {
+            color: black;
+        }
+
+        .navlink {
+            height: 100%;
+            /* background-color: red; */
+            margin: 0px;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="horizantalnav">
+            <ul class="child">
+                <li><img src="data:image/png;base64,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"
+                        alt="logo" id="logo"></li>
+                <li><a href="#" class="navlink">MEN</a>
+                    <div class="hello">
+                        <div class="innerdiv">
+                            <ul class="ul">
+                                <li class="m0"><a href="#">Topwear</a></li>
+                                <li class="m1"><a href="#">Casual Shirts</a></li>
+                                <li class="m1"><a href="#">Formal Shirt</a></li>
+                                <li class="m1"><a href="#">Sweatshirts</a></li>
+                                <li class="m1"><a href="#">Sweator</a></li>
+                                <li class="m1"><a href="#">Jackets</a></li>
+                                <li class="m1"><a href="#">Blazer & Coats</a></li>
+                                <li class="m1"><a href="#">Suits</a></li>
+                                <li class="m1"><a href="#">Rain Zaket</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">Indian & Festive Wear</a></li>
+                                <li class="m1"><a href="#">Kurtas & Kurta Sets</a></li>
+                                <li class="m1"><a href="#">Sherwani</a></li>
+                                <li class="m1"><a href="#">Nehru Jacket</a></li>
+                                <li class="m1"><a href="#">Dhotis</a></li>
+
+                            </ul>
+                        </div>
+                        <div class="innerdiv">
+                            <ul class="ul">
+                                <li class="m0"><a href="#">Bottomwear</a></li>
+                                <li class="m1"><a href="#">Jeans</a></li>
+                                <li class="m1"><a href="#">Casual Trousers</a></li>
+                                <li class="m1"><a href="#">Formal Trousers</a></li>
+                                <li class="m1"><a href="#">Shorts</a></li>
+                                <li class="m1"><a href="#">Track Pants & Joggers</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">InnerWear & SleepWear</a></li>
+                                <li class="m1"><a href="#">Brief & Trunks</a></li>
+                                <li class="m1"><a href="#">Boxer</a></li>
+                                <li class="m1"><a href="#">Vests</a></li>
+                                <li class="m1"><a href="#">Sleepwear & Loungwear</a></li>
+                                <li class="m1"><a href="#">Thermals</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">Plus Size</a></li>
+                                <li class="m1">&nbsp;</li>
+
+                            </ul>
+                        </div>
+                        <div class="innerdiv">
+                            <ul class="div">
+                                <li class="m0"><a href="#">Footwear</a></li>
+                                <li class="m1"><a href="#">Sports Shoes</a></li>
+                                <li class="m1"><a href="#">Formal Shoes</a></li>
+                                <li class="m1"><a href="#">Sneakers</a></li>
+                                <li class="m1"><a href="#">Sandals & Floaters</a></li>
+                                <li class="m1"><a href="#">Flip Flops</a></li>
+                                <li class="m1"><a href="#">Socks</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">Personal Care & Grooming</a></li>
+                                <li class="m1"><a href="#">Sunglasses & Frames</a></li>
+                                <li class="m1"><a href="#">Watches</a></li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                            </ul>
+                        </div>
+                        <div class="innerdiv">
+                            <ul class="ul">
+                                <li class="m0"><a href="#">Sports & Active Wear</a></li>
+                                <li class="m1"><a href="#">Sports Shoes</a></li>
+                                <li class="m1"><a href="#">Sports Sandals</a></li>
+                                <li class="m1"><a href="#">Active T-Shirts</a></li>
+                                <li class="m1"><a href="#">Track Pant and Shorts</a></li>
+                                <li class="m1"><a href="#">Tracksuits</a></li>
+                                <li class="m1"><a href="#">Jackets & Sweatshirts</a></li>
+                                <li class="m1"><a href="#">Sports Accessories</a></li>
+                                <li class="m1"><a href="#">Swimwear</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m0"><a href="#">Gadgets</a></li>
+                                <li class="m1"><a href="#">Smart Wearables</a></li>
+                                <li class="m1"><a href="#">Fitness Gadgets</a></li>
+                                <li class="m1"><a href="#">Headphones</a></li>
+                                <li class="m1"><a href="#">Speaker</a></li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </li>
+                <li><a href="#" class="navlink">WOMEN</a>
+                <div class="hello">
+                        <div class="innerdiv">
+                            <ul class="ul">
+                                <li class="m0"><a href="#">Topwear</a></li>
+                                <li class="m1"><a href="#">Casual Shirts</a></li>
+                                <li class="m1"><a href="#">Formal Shirt</a></li>
+                                <li class="m1"><a href="#">Sweatshirts</a></li>
+                                <li class="m1"><a href="#">Sweator</a></li>
+                                <li class="m1"><a href="#">Jackets</a></li>
+                                <li class="m1"><a href="#">Blazer & Coats</a></li>
+                                <li class="m1"><a href="#">Suits</a></li>
+                                <li class="m1"><a href="#">Rain Zaket</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">Indian & Festive Wear</a></li>
+                                <li class="m1"><a href="#">Kurtas & Kurta Sets</a></li>
+                                <li class="m1"><a href="#">Sherwani</a></li>
+                                <li class="m1"><a href="#">Nehru Jacket</a></li>
+                                <li class="m1"><a href="#">Dhotis</a></li>
+
+                            </ul>
+                        </div>
+                        <div class="innerdiv">
+                            <ul class="ul">
+                                <li class="m0"><a href="#">Bottomwear</a></li>
+                                <li class="m1"><a href="#">Jeans</a></li>
+                                <li class="m1"><a href="#">Casual Trousers</a></li>
+                                <li class="m1"><a href="#">Formal Trousers</a></li>
+                                <li class="m1"><a href="#">Shorts</a></li>
+                                <li class="m1"><a href="#">Track Pants & Joggers</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">InnerWear & SleepWear</a></li>
+                                <li class="m1"><a href="#">Brief & Trunks</a></li>
+                                <li class="m1"><a href="#">Boxer</a></li>
+                                <li class="m1"><a href="#">Vests</a></li>
+                                <li class="m1"><a href="#">Sleepwear & Loungwear</a></li>
+                                <li class="m1"><a href="#">Thermals</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">Plus Size</a></li>
+                                <li class="m1">&nbsp;</li>
+
+                            </ul>
+                        </div>
+                        <div class="innerdiv">
+                            <ul class="div">
+                                <li class="m0"><a href="#">Footwear</a></li>
+                                <li class="m1"><a href="#">Sports Shoes</a></li>
+                                <li class="m1"><a href="#">Formal Shoes</a></li>
+                                <li class="m1"><a href="#">Sneakers</a></li>
+                                <li class="m1"><a href="#">Sandals & Floaters</a></li>
+                                <li class="m1"><a href="#">Flip Flops</a></li>
+                                <li class="m1"><a href="#">Socks</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">Personal Care & Grooming</a></li>
+                                <li class="m1"><a href="#">Sunglasses & Frames</a></li>
+                                <li class="m1"><a href="#">Watches</a></li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                            </ul>
+                        </div>
+                        <div class="innerdiv">
+                            <ul class="ul">
+                                <li class="m0"><a href="#">Sports & Active Wear</a></li>
+                                <li class="m1"><a href="#">Sports Shoes</a></li>
+                                <li class="m1"><a href="#">Sports Sandals</a></li>
+                                <li class="m1"><a href="#">Active T-Shirts</a></li>
+                                <li class="m1"><a href="#">Track Pant and Shorts</a></li>
+                                <li class="m1"><a href="#">Tracksuits</a></li>
+                                <li class="m1"><a href="#">Jackets & Sweatshirts</a></li>
+                                <li class="m1"><a href="#">Sports Accessories</a></li>
+                                <li class="m1"><a href="#">Swimwear</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m0"><a href="#">Gadgets</a></li>
+                                <li class="m1"><a href="#">Smart Wearables</a></li>
+                                <li class="m1"><a href="#">Fitness Gadgets</a></li>
+                                <li class="m1"><a href="#">Headphones</a></li>
+                                <li class="m1"><a href="#">Speaker</a></li>
+
+                            </ul>
+                        </div>
+
+                    </div></li>
+                <li><a href="#" class="navlink">KIDS</a>
+                <div class="hello">
+                        <div class="innerdiv">
+                            <ul class="ul">
+                                <li class="m0"><a href="#">Topwear</a></li>
+                                <li class="m1"><a href="#">Casual Shirts</a></li>
+                                <li class="m1"><a href="#">Formal Shirt</a></li>
+                                <li class="m1"><a href="#">Sweatshirts</a></li>
+                                <li class="m1"><a href="#">Sweator</a></li>
+                                <li class="m1"><a href="#">Jackets</a></li>
+                                <li class="m1"><a href="#">Blazer & Coats</a></li>
+                                <li class="m1"><a href="#">Suits</a></li>
+                                <li class="m1"><a href="#">Rain Zaket</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">Indian & Festive Wear</a></li>
+                                <li class="m1"><a href="#">Kurtas & Kurta Sets</a></li>
+                                <li class="m1"><a href="#">Sherwani</a></li>
+                                <li class="m1"><a href="#">Nehru Jacket</a></li>
+                                <li class="m1"><a href="#">Dhotis</a></li>
+
+                            </ul>
+                        </div>
+                        <div class="innerdiv">
+                            <ul class="ul">
+                                <li class="m0"><a href="#">Bottomwear</a></li>
+                                <li class="m1"><a href="#">Jeans</a></li>
+                                <li class="m1"><a href="#">Casual Trousers</a></li>
+                                <li class="m1"><a href="#">Formal Trousers</a></li>
+                                <li class="m1"><a href="#">Shorts</a></li>
+                                <li class="m1"><a href="#">Track Pants & Joggers</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">InnerWear & SleepWear</a></li>
+                                <li class="m1"><a href="#">Brief & Trunks</a></li>
+                                <li class="m1"><a href="#">Boxer</a></li>
+                                <li class="m1"><a href="#">Vests</a></li>
+                                <li class="m1"><a href="#">Sleepwear & Loungwear</a></li>
+                                <li class="m1"><a href="#">Thermals</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">Plus Size</a></li>
+                                <li class="m1">&nbsp;</li>
+
+                            </ul>
+                        </div>
+                        <div class="innerdiv">
+                            <ul class="div">
+                                <li class="m0"><a href="#">Footwear</a></li>
+                                <li class="m1"><a href="#">Sports Shoes</a></li>
+                                <li class="m1"><a href="#">Formal Shoes</a></li>
+                                <li class="m1"><a href="#">Sneakers</a></li>
+                                <li class="m1"><a href="#">Sandals & Floaters</a></li>
+                                <li class="m1"><a href="#">Flip Flops</a></li>
+                                <li class="m1"><a href="#">Socks</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">Personal Care & Grooming</a></li>
+                                <li class="m1"><a href="#">Sunglasses & Frames</a></li>
+                                <li class="m1"><a href="#">Watches</a></li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                            </ul>
+                        </div>
+                        <div class="innerdiv">
+                            <ul class="ul">
+                                <li class="m0"><a href="#">Sports & Active Wear</a></li>
+                                <li class="m1"><a href="#">Sports Shoes</a></li>
+                                <li class="m1"><a href="#">Sports Sandals</a></li>
+                                <li class="m1"><a href="#">Active T-Shirts</a></li>
+                                <li class="m1"><a href="#">Track Pant and Shorts</a></li>
+                                <li class="m1"><a href="#">Tracksuits</a></li>
+                                <li class="m1"><a href="#">Jackets & Sweatshirts</a></li>
+                                <li class="m1"><a href="#">Sports Accessories</a></li>
+                                <li class="m1"><a href="#">Swimwear</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m0"><a href="#">Gadgets</a></li>
+                                <li class="m1"><a href="#">Smart Wearables</a></li>
+                                <li class="m1"><a href="#">Fitness Gadgets</a></li>
+                                <li class="m1"><a href="#">Headphones</a></li>
+                                <li class="m1"><a href="#">Speaker</a></li>
+
+                            </ul>
+                        </div>
+
+                    </div></li>
+                <li><a href="#" class="navlink">HOME & LIVING</a>
+                <div class="hello">
+                        <div class="innerdiv">
+                            <ul class="ul">
+                                <li class="m0"><a href="#">Topwear</a></li>
+                                <li class="m1"><a href="#">Casual Shirts</a></li>
+                                <li class="m1"><a href="#">Formal Shirt</a></li>
+                                <li class="m1"><a href="#">Sweatshirts</a></li>
+                                <li class="m1"><a href="#">Sweator</a></li>
+                                <li class="m1"><a href="#">Jackets</a></li>
+                                <li class="m1"><a href="#">Blazer & Coats</a></li>
+                                <li class="m1"><a href="#">Suits</a></li>
+                                <li class="m1"><a href="#">Rain Zaket</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">Indian & Festive Wear</a></li>
+                                <li class="m1"><a href="#">Kurtas & Kurta Sets</a></li>
+                                <li class="m1"><a href="#">Sherwani</a></li>
+                                <li class="m1"><a href="#">Nehru Jacket</a></li>
+                                <li class="m1"><a href="#">Dhotis</a></li>
+
+                            </ul>
+                        </div>
+                        <div class="innerdiv">
+                            <ul class="ul">
+                                <li class="m0"><a href="#">Bottomwear</a></li>
+                                <li class="m1"><a href="#">Jeans</a></li>
+                                <li class="m1"><a href="#">Casual Trousers</a></li>
+                                <li class="m1"><a href="#">Formal Trousers</a></li>
+                                <li class="m1"><a href="#">Shorts</a></li>
+                                <li class="m1"><a href="#">Track Pants & Joggers</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">InnerWear & SleepWear</a></li>
+                                <li class="m1"><a href="#">Brief & Trunks</a></li>
+                                <li class="m1"><a href="#">Boxer</a></li>
+                                <li class="m1"><a href="#">Vests</a></li>
+                                <li class="m1"><a href="#">Sleepwear & Loungwear</a></li>
+                                <li class="m1"><a href="#">Thermals</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">Plus Size</a></li>
+                                <li class="m1">&nbsp;</li>
+
+                            </ul>
+                        </div>
+                        <div class="innerdiv">
+                            <ul class="div">
+                                <li class="m0"><a href="#">Footwear</a></li>
+                                <li class="m1"><a href="#">Sports Shoes</a></li>
+                                <li class="m1"><a href="#">Formal Shoes</a></li>
+                                <li class="m1"><a href="#">Sneakers</a></li>
+                                <li class="m1"><a href="#">Sandals & Floaters</a></li>
+                                <li class="m1"><a href="#">Flip Flops</a></li>
+                                <li class="m1"><a href="#">Socks</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">Personal Care & Grooming</a></li>
+                                <li class="m1"><a href="#">Sunglasses & Frames</a></li>
+                                <li class="m1"><a href="#">Watches</a></li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                            </ul>
+                        </div>
+                        <div class="innerdiv">
+                            <ul class="ul">
+                                <li class="m0"><a href="#">Sports & Active Wear</a></li>
+                                <li class="m1"><a href="#">Sports Shoes</a></li>
+                                <li class="m1"><a href="#">Sports Sandals</a></li>
+                                <li class="m1"><a href="#">Active T-Shirts</a></li>
+                                <li class="m1"><a href="#">Track Pant and Shorts</a></li>
+                                <li class="m1"><a href="#">Tracksuits</a></li>
+                                <li class="m1"><a href="#">Jackets & Sweatshirts</a></li>
+                                <li class="m1"><a href="#">Sports Accessories</a></li>
+                                <li class="m1"><a href="#">Swimwear</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m0"><a href="#">Gadgets</a></li>
+                                <li class="m1"><a href="#">Smart Wearables</a></li>
+                                <li class="m1"><a href="#">Fitness Gadgets</a></li>
+                                <li class="m1"><a href="#">Headphones</a></li>
+                                <li class="m1"><a href="#">Speaker</a></li>
+
+                            </ul>
+                        </div>
+
+                    </div></li>
+                <li><a href="#" class="navlink">BEAUTY</a>
+                <div class="hello">
+                        <div class="innerdiv">
+                            <ul class="ul">
+                                <li class="m0"><a href="#">Topwear</a></li>
+                                <li class="m1"><a href="#">Casual Shirts</a></li>
+                                <li class="m1"><a href="#">Formal Shirt</a></li>
+                                <li class="m1"><a href="#">Sweatshirts</a></li>
+                                <li class="m1"><a href="#">Sweator</a></li>
+                                <li class="m1"><a href="#">Jackets</a></li>
+                                <li class="m1"><a href="#">Blazer & Coats</a></li>
+                                <li class="m1"><a href="#">Suits</a></li>
+                                <li class="m1"><a href="#">Rain Zaket</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">Indian & Festive Wear</a></li>
+                                <li class="m1"><a href="#">Kurtas & Kurta Sets</a></li>
+                                <li class="m1"><a href="#">Sherwani</a></li>
+                                <li class="m1"><a href="#">Nehru Jacket</a></li>
+                                <li class="m1"><a href="#">Dhotis</a></li>
+
+                            </ul>
+                        </div>
+                        <div class="innerdiv">
+                            <ul class="ul">
+                                <li class="m0"><a href="#">Bottomwear</a></li>
+                                <li class="m1"><a href="#">Jeans</a></li>
+                                <li class="m1"><a href="#">Casual Trousers</a></li>
+                                <li class="m1"><a href="#">Formal Trousers</a></li>
+                                <li class="m1"><a href="#">Shorts</a></li>
+                                <li class="m1"><a href="#">Track Pants & Joggers</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">InnerWear & SleepWear</a></li>
+                                <li class="m1"><a href="#">Brief & Trunks</a></li>
+                                <li class="m1"><a href="#">Boxer</a></li>
+                                <li class="m1"><a href="#">Vests</a></li>
+                                <li class="m1"><a href="#">Sleepwear & Loungwear</a></li>
+                                <li class="m1"><a href="#">Thermals</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">Plus Size</a></li>
+                                <li class="m1">&nbsp;</li>
+
+                            </ul>
+                        </div>
+                        <div class="innerdiv">
+                            <ul class="div">
+                                <li class="m0"><a href="#">Footwear</a></li>
+                                <li class="m1"><a href="#">Sports Shoes</a></li>
+                                <li class="m1"><a href="#">Formal Shoes</a></li>
+                                <li class="m1"><a href="#">Sneakers</a></li>
+                                <li class="m1"><a href="#">Sandals & Floaters</a></li>
+                                <li class="m1"><a href="#">Flip Flops</a></li>
+                                <li class="m1"><a href="#">Socks</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">Personal Care & Grooming</a></li>
+                                <li class="m1"><a href="#">Sunglasses & Frames</a></li>
+                                <li class="m1"><a href="#">Watches</a></li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                            </ul>
+                        </div>
+                        <div class="innerdiv">
+                            <ul class="ul">
+                                <li class="m0"><a href="#">Sports & Active Wear</a></li>
+                                <li class="m1"><a href="#">Sports Shoes</a></li>
+                                <li class="m1"><a href="#">Sports Sandals</a></li>
+                                <li class="m1"><a href="#">Active T-Shirts</a></li>
+                                <li class="m1"><a href="#">Track Pant and Shorts</a></li>
+                                <li class="m1"><a href="#">Tracksuits</a></li>
+                                <li class="m1"><a href="#">Jackets & Sweatshirts</a></li>
+                                <li class="m1"><a href="#">Sports Accessories</a></li>
+                                <li class="m1"><a href="#">Swimwear</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m0"><a href="#">Gadgets</a></li>
+                                <li class="m1"><a href="#">Smart Wearables</a></li>
+                                <li class="m1"><a href="#">Fitness Gadgets</a></li>
+                                <li class="m1"><a href="#">Headphones</a></li>
+                                <li class="m1"><a href="#">Speaker</a></li>
+
+                            </ul>
+                        </div>
+
+                    </div></li>
+                <li><a href="#" class="navlink">STUDIO<sup style="color: red;">NEW</sup></a>
+                <div class="hello">
+                        <div class="innerdiv">
+                            <ul class="ul">
+                                <li class="m0"><a href="#">Topwear</a></li>
+                                <li class="m1"><a href="#">Casual Shirts</a></li>
+                                <li class="m1"><a href="#">Formal Shirt</a></li>
+                                <li class="m1"><a href="#">Sweatshirts</a></li>
+                                <li class="m1"><a href="#">Sweator</a></li>
+                                <li class="m1"><a href="#">Jackets</a></li>
+                                <li class="m1"><a href="#">Blazer & Coats</a></li>
+                                <li class="m1"><a href="#">Suits</a></li>
+                                <li class="m1"><a href="#">Rain Zaket</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">Indian & Festive Wear</a></li>
+                                <li class="m1"><a href="#">Kurtas & Kurta Sets</a></li>
+                                <li class="m1"><a href="#">Sherwani</a></li>
+                                <li class="m1"><a href="#">Nehru Jacket</a></li>
+                                <li class="m1"><a href="#">Dhotis</a></li>
+
+                            </ul>
+                        </div>
+                        <div class="innerdiv">
+                            <ul class="ul">
+                                <li class="m0"><a href="#">Bottomwear</a></li>
+                                <li class="m1"><a href="#">Jeans</a></li>
+                                <li class="m1"><a href="#">Casual Trousers</a></li>
+                                <li class="m1"><a href="#">Formal Trousers</a></li>
+                                <li class="m1"><a href="#">Shorts</a></li>
+                                <li class="m1"><a href="#">Track Pants & Joggers</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">InnerWear & SleepWear</a></li>
+                                <li class="m1"><a href="#">Brief & Trunks</a></li>
+                                <li class="m1"><a href="#">Boxer</a></li>
+                                <li class="m1"><a href="#">Vests</a></li>
+                                <li class="m1"><a href="#">Sleepwear & Loungwear</a></li>
+                                <li class="m1"><a href="#">Thermals</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">Plus Size</a></li>
+                                <li class="m1">&nbsp;</li>
+
+                            </ul>
+                        </div>
+                        <div class="innerdiv">
+                            <ul class="div">
+                                <li class="m0"><a href="#">Footwear</a></li>
+                                <li class="m1"><a href="#">Sports Shoes</a></li>
+                                <li class="m1"><a href="#">Formal Shoes</a></li>
+                                <li class="m1"><a href="#">Sneakers</a></li>
+                                <li class="m1"><a href="#">Sandals & Floaters</a></li>
+                                <li class="m1"><a href="#">Flip Flops</a></li>
+                                <li class="m1"><a href="#">Socks</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m0"><a href="#">Personal Care & Grooming</a></li>
+                                <li class="m1"><a href="#">Sunglasses & Frames</a></li>
+                                <li class="m1"><a href="#">Watches</a></li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m1">&nbsp;</li>
+                            </ul>
+                        </div>
+                        <div class="innerdiv">
+                            <ul class="ul">
+                                <li class="m0"><a href="#">Sports & Active Wear</a></li>
+                                <li class="m1"><a href="#">Sports Shoes</a></li>
+                                <li class="m1"><a href="#">Sports Sandals</a></li>
+                                <li class="m1"><a href="#">Active T-Shirts</a></li>
+                                <li class="m1"><a href="#">Track Pant and Shorts</a></li>
+                                <li class="m1"><a href="#">Tracksuits</a></li>
+                                <li class="m1"><a href="#">Jackets & Sweatshirts</a></li>
+                                <li class="m1"><a href="#">Sports Accessories</a></li>
+                                <li class="m1"><a href="#">Swimwear</a></li>
+                                <li class="m1">
+                                    <hr>
+                                </li>
+                                <li class="m1">&nbsp;</li>
+                                <li class="m0"><a href="#">Gadgets</a></li>
+                                <li class="m1"><a href="#">Smart Wearables</a></li>
+                                <li class="m1"><a href="#">Fitness Gadgets</a></li>
+                                <li class="m1"><a href="#">Headphones</a></li>
+                                <li class="m1"><a href="#">Speaker</a></li>
+
+                            </ul>
+                        </div>
+
+                    </div></li>
+                <li><input type="text" name="" id="search" placeholder="Search for product,brands and more"
+                        class="input1">
+                    <label for="search"></label>
+                </li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Wishlist</a></li>
+                <li><a href="#">Bag</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+</body>
+
+</html>
